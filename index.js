@@ -1,4 +1,4 @@
-var seneca = require ("seneca")();
+ var seneca = require ("seneca")();
 var data = require ("./MOCK_DATA.json");
 
 seneca.add("role:users,cmd:get", function(msg, respond) {
