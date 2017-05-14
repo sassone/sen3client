@@ -2,9 +2,7 @@
 const Hapi = require('hapi');
 
 const server = new Hapi.Server();
-server.connection({ port: 3100 });
-
-//, host: 'localhost'
+server.connection({ port: 3100, host: 'localhost' });
 
 // Pass options to the Seneca constructor
 var senecaOptions = { log: 'silent' };
@@ -48,13 +46,12 @@ server.route({
     path: '/a/id',
     handler: function (request, reply) {
         // Invoke a Seneca action using the request decoration
-        var seneca = require("seneca")();
-        seneca.client({ host: "127.0.0.1", port: 3000 }).act({ "role": "users", "cmd": "get", "id": 5 }, function (err, response) {
+        request.seneca.act({ generate: 'id' }, function (err, result) {
             if (err) {
                 return reply(err);
             }
-            return reply(response);
-        })
+            return reply(result);
+        });
     }
 });
 
