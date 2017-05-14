@@ -49,7 +49,8 @@ server.route({
     handler: function (request, reply) {
         // Invoke a Seneca action using the request decoration
         var seneca = require("seneca")();
-        seneca.client({ host: "127.0.0.1", port: 3000 }).act({ "role": "users", "cmd": "get", "id": 5 }, function (err, response) {
+        // host: "127.0.0.1",
+        seneca.client({  port: 3000 }).act({ "role": "users", "cmd": "get", "id": 5 }, function (err, response) {
             if (err) {
                 return reply(err);
             }
